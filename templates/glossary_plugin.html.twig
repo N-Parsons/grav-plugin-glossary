@@ -1,0 +1,49 @@
+{% extends 'default.html.twig' %}
+
+{% set plugin_config = config.plugins.glossary %}
+
+{% if plugin_config.builtin_css %}
+  {% do assets.addCss('plugin://glossary/css/glossary.css', 100)  %}
+{% endif %}
+
+
+{% set terms = plugin_config["definitions"] %}
+
+{% set query = uri.param("query") %}
+
+
+{% set definitions = {} %}
+{% for term in terms %}
+  {# if 'has definition' and 'matches query' #}
+  {% if term.definition and (not query or query in (term.term ~ " " ~ term.abbrev ~ " " ~ term.definition)|lower) %}
+    {% set definitions = definitions|merge({(term.term): [term.abbrev, term.definition]}) %}
+  {% endif %}
+{% endfor %}
+
+{% set definitions = definitions|ksort %}
+
+
+{% block content %}
+  <h1>{{ page.title }}</h1>
+
+  {{ content|raw }}
+
+  {% if config.plugins.simplesearch.enabled and plugin_config.show_search %}
+    {% include 'partials/glossary_simplesearch.html.twig' %}
+  {% endif %}
+
+  {% if plugin_config.item_template is same as("details_summary") %}
+    <div class="glossary">
+      {% for key, value in definitions %}
+        {% include 'partials/glossary_details_summary.html.twig' with {term: key, item: value } %}
+      {% endfor %}
+    </div>
+  {% else %}
+    <dl class="glossary">
+      {% for key, value in definitions %}
+        {% include 'partials/glossary_dt_dd.html.twig' with {term: key, item: value } %}
+      {% endfor %}
+    </dl>
+  {% endif %}
+
+{% endblock %}

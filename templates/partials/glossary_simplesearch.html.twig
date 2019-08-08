@@ -1,0 +1,57 @@
+{# Heavily based on 'partials/simplesearch_searchbox.html.twig' #}
+{# and 'simplesearch_results.html.twig' from the 'simplesearch' plugin #}
+{# https://github.com/getgrav/grav-plugin-simplesearch #}
+
+{% set show_button = config.plugins.simplesearch.display_button %}
+{% set button_icon = config.plugins.glossary.fa_search_icon %}
+{% set reset_icon = config.plugins.glossary.fa_reset_icon %}
+
+{% set min_chars = config.get('plugins.simplesearch.min_query_length', 3) %}
+<div class="search-wrapper">
+  <form name="search" data-simplesearch-form>
+    <input
+      name="searchfield"
+      class="search-input"
+      type="text"
+      {% if min_chars > 0 %} min="{{- min_chars -}}" {% endif %}
+      required
+      placeholder="{{"PLUGIN_SIMPLESEARCH.SEARCH_PLACEHOLDER"|t}}"
+      value="{{ query|e }}"
+      data-search-invalid="{{ "PLUGIN_SIMPLESEARCH.SEARCH_FIELD_MINIMUM_CHARACTERS"|t(min_chars)|raw }}"
+      data-search-separator="{{ config.system.param_sep }}"
+      data-search-input="{{ base_url }}{{ page.route }}/query"
+    />
+
+    {% if button_icon %}
+      <button title="Submit search" type="submit" class="button search-submit">
+        <i class="icon {{ button_icon|default('fa fas fa-search') }}"></i>
+      </button>
+    {% else %}
+      {% if show_button %}
+        <button title="Submit search" type="submit" class="search-submit">
+          <img src="{{ url('plugin://simplesearch/assets/search.svg') }}" />
+        </button>
+      {% endif %}
+    {% endif %}
+
+    {% if uri.param("query") %}
+      {% if reset_icon %}
+        {% set reset_text = '<i class="icon ' ~ reset_icon ~ '"></i>' %}
+      {% else %}
+        {% set reset_text = 'Reset' %}
+      {% endif %}
+      <a title="Clear search" class="button search-submit clear-filter" href="{{ page.route }}">{{ reset_text|raw }}</a>
+    {% endif %}
+  </form>
+
+  <div class="query-count">
+    {% if query %}
+      {% set count = definitions|length %}
+      {% if count is same as( 1 ) %}
+        {{ "PLUGIN_SIMPLESEARCH.SEARCH_RESULTS_SUMMARY_SINGULAR"|t(query|e)|raw }}
+      {% else %}
+        {{ "PLUGIN_SIMPLESEARCH.SEARCH_RESULTS_SUMMARY_PLURAL"|t(query|e, count)|raw }}
+      {% endif %}
+    {% endif %}
+  </div>
+</div>

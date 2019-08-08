@@ -1,0 +1,33 @@
+.glossary {
+  margin: 1.5rem 0;
+}
+
+.glossary dt,
+.glossary summary {
+  font-weight: bold;
+}
+
+.glossary dd:not(:last-child),
+.glossary details:not(:last-child) {
+  margin-bottom: 0.75rem;
+}
+
+.glossary summary:not(:first-child) {
+  margin-top: 0.5rem;
+}
+
+.search-results .search-query {
+  font-weight: bold;
+}
+
+.search-wrapper .clear-filter {
+  margin-left: 0.5rem;
+}
+
+.search-wrapper form * {
+  vertical-align: middle;
+}
+
+.search-wrapper form .clear-filter {
+  margin-left: 0;
+}

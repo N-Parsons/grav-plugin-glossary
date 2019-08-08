@@ -1,0 +1,11 @@
+{% set acronym = item|first %}
+{% set definition = item|last %}
+
+
+<dt>
+  {{ term }}
+  {% if acronym %}
+    <span class="acronym">({{ acronym }})</span>
+  {% endif %}
+</dt>
+<dd>{{ definition|markdown }}</dd>

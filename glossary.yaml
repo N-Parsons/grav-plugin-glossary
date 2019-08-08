@@ -1,0 +1,10 @@
+enabled: true
+builtin_css: true
+show_search: true
+item_template: "dt_dd"
+abbreviations: true
+definitions:
+  -
+    term: Some long complicated term
+    abbrev: SLCT
+    definition: Definition of the term (can include markdown)

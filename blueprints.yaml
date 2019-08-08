@@ -1,0 +1,92 @@
+name: Glossary
+version: 0.1.0
+description: Maintain a glossary of words and automatically add abbreviations to all pages via Markdown Extra.
+icon: list
+author:
+  name: Nathan Parsons
+  email: github@tantalum.blue
+  url: https://github.com/n-parsons
+keywords: grav, plugin, glossary, abbreviation, definitions
+homepage: https://github.com/n-parsons/grav-plugin-glossary
+bugs: https://github.com/n-parsons/grav-plugin-glossary/issues
+license: MIT
+
+form:
+  validation: strict
+  fields:
+    enabled:
+      type: toggle
+      label: Plugin status
+      highlight: 1
+      default: 0
+      options:
+        1: PLUGIN_ADMIN.ENABLED
+        0: PLUGIN_ADMIN.DISABLED
+      validate:
+        type: bool
+    builtin_css:
+      type: toggle
+      label: Use builtin CSS
+      highlight: 1
+      default: 1
+      options:
+        1: PLUGIN_ADMIN.ENABLED
+        0: PLUGIN_ADMIN.DISABLED
+      validate:
+        type: bool
+    show_search:
+      type: toggle
+      label: Search on glossary page
+      info: Requires Simple Search
+      highlight: 1
+      default: 1
+      options:
+        1: PLUGIN_ADMIN.ENABLED
+        0: PLUGIN_ADMIN.DISABLED
+      validate:
+        type: bool
+    fa_search_icon:
+      type: text
+      label: Search icon
+      placeholder: "eg. fas fa-search"
+    fa_reset_icon:
+      type: text
+      label: Reset icon
+      placeholder: "eg. fas fa-times"
+    item_template:
+      type: select
+      label: Item template
+      default: "dt_dd"
+      options:
+        "dt_dd": "Definition list (dl, dt, dd)"
+        "details_summary": "Accordion (details, summary)"
+    abbreviations:
+      type: toggle
+      label: Site-wide abbreviations
+      help: Requires Markdown Extra to be enabled
+      highlight: 1
+      default: 1
+      options:
+        1: PLUGIN_ADMIN.ENABLED
+        0: PLUGIN_ADMIN.DISABLED
+      validate:
+        type: bool
+    definitions:
+      type: list
+      style: vertical
+      label: Definitions
+      collapsed: true
+      collapsible: true
+      fields:
+        .term:
+          type: text
+          label: Term
+          validate:
+            required: true
+        .abbrev:
+          type: text
+          label: Abbreviation
+        .definition:
+          type: editor
+          size: small
+          label: Definition
