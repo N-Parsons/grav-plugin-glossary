@@ -37,7 +37,7 @@ form:
     show_search:
       type: toggle
       label: Search on glossary page
-      info: Requires Simple Search
+      help: Requires Simple Search
       highlight: 1
       default: 1
       options:
