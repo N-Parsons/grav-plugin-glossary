@@ -68,11 +68,11 @@ The Glossary plugin has the following configuration options:
 
 - `enabled` (bool): Determines whether the plugin is enabled.
 - `builtin_css` (bool): Whether to load the built-in CSS on the glossary page.
+- `abbreviations` (bool): Whether to enable site-wide abbreviations (required Markdown Extra).
 - `show_search` (bool): Whether to show search on the glossary page (requires Simple Search).
 - `fa_search_icon` (text): Font Awesome icon to use in the search button (eg. `fas fa-search`). Setting this to an empty string displays the icon from the SimpleSearch plugin.
 - `fa_reset_icon`(text): Font Awesome icon to use in the search reset button (eg. `fas fa-times`).
 - `item_template` (text): Template to use for formatting glossary items.
-- `abbreviations` (bool): Whether to enable site-wide abbreviations (required Markdown Extra).
 - `definitions` (list): List of arrays with the keys `term`, `abbrev`, and `definition`.
 
 

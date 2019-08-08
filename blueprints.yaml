@@ -1,5 +1,5 @@
 name: Glossary
-version: 0.1.0
+version: 0.1.1
 description: Maintain a glossary of words and automatically add abbreviations to all pages via Markdown Extra.
 icon: list
 author:
@@ -24,6 +24,7 @@ form:
         0: PLUGIN_ADMIN.DISABLED
       validate:
         type: bool
+
     builtin_css:
       type: toggle
       label: Use builtin CSS
@@ -34,32 +35,7 @@ form:
         0: PLUGIN_ADMIN.DISABLED
       validate:
         type: bool
-    show_search:
-      type: toggle
-      label: Search on glossary page
-      help: Requires Simple Search
-      highlight: 1
-      default: 1
-      options:
-        1: PLUGIN_ADMIN.ENABLED
-        0: PLUGIN_ADMIN.DISABLED
-      validate:
-        type: bool
-    fa_search_icon:
-      type: text
-      label: Search icon
-      placeholder: "eg. fas fa-search"
-    fa_reset_icon:
-      type: text
-      label: Reset icon
-      placeholder: "eg. fas fa-times"
-    item_template:
-      type: select
-      label: Item template
-      default: "dt_dd"
-      options:
-        "dt_dd": "Definition list (dl, dt, dd)"
-        "details_summary": "Accordion (details, summary)"
+
     abbreviations:
       type: toggle
       label: Site-wide abbreviations
@@ -71,22 +47,62 @@ form:
         0: PLUGIN_ADMIN.DISABLED
       validate:
         type: bool
-    definitions:
-      type: list
-      style: vertical
-      label: Definitions
-      collapsed: true
-      collapsible: true
+
+    glossary_section:
+      type: section
+      title: Glossary page
+      text: This section allows you to configure the glossary page; you can add this to your site by creating a page with the `glossary_plugin` template. Search functionality depends on the SimpleSearch plugin.
       fields:
-        .term:
-          type: text
-          label: Term
+        show_search:
+          type: toggle
+          label: Search on glossary page
+          help: Requires Simple Search
+          highlight: 1
+          default: 1
+          options:
+            1: PLUGIN_ADMIN.ENABLED
+            0: PLUGIN_ADMIN.DISABLED
           validate:
-            required: true
-        .abbrev:
+            type: bool
+
+        fa_search_icon:
           type: text
-          label: Abbreviation
-        .definition:
-          type: editor
-          size: small
-          label: Definition
+          label: Search icon
+          placeholder: "eg. fas fa-search"
+
+        fa_reset_icon:
+          type: text
+          label: Reset icon
+          placeholder: "eg. fas fa-times"
+
+        item_template:
+          type: select
+          label: Item template
+          default: "dt_dd"
+          options:
+            "dt_dd": "Definition list (dl, dt, dd)"
+            "details_summary": "Accordion (details, summary)"
+
+    definitions_section:
+      type: section
+      title: Definitions and abbreviations
+      text: Below is where you define your glossary terms and abbreviations; you can use Markdown in your definitions. The order here doesn't matter; they will be presented in alphabetical order in the glossary.
+      fields:
+        definitions:
+          type: list
+          style: vertical
+          collapsed: true
+          collapsible: true
+          fields:
+            .term:
+              type: text
+              label: Term
+              validate:
+                required: true
+            .abbrev:
+              type: text
+              label: Abbreviation
+            .definition:
+              type: editor
+              size: small
+              label: Definition

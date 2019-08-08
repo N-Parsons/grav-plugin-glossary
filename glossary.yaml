@@ -1,8 +1,12 @@
 enabled: true
 builtin_css: true
-show_search: true
-item_template: "dt_dd"
 abbreviations: true
+
+show_search: true
+fa_search_icon: 'fas fa-search'
+fa_reset_icon: 'fas fa-times'
+item_template: 'dt_dd'
+
 definitions:
   -
     term: Some long complicated term
