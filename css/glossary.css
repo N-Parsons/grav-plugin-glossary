@@ -1,3 +1,7 @@
+.glossary-tooltip{background:#292c35;border-radius:25px;border:1px solid #03c03c;padding:10px;z-index:90;text-align:left;visibility:hidden;opacity:0;right:10px;box-shadow:-5px 5px 25px -15px #33a82f;transition: opacity 0.2s ease-in-out}
+abbr.glossary-term{border-bottom:1px dotted #fff;cursor:help}
+abbr.glossary-term:hover{background-color:yellow}
+body.light abbr.glossary-term{border-color:#000}
 .glossary {
   margin: 1.5rem 0;
 }

@@ -1,5 +1,5 @@
 name: Glossary
-version: 0.1.1
+version: 0.2.0
 description: Maintain a glossary of words and automatically add abbreviations to all pages via Markdown Extra.
 icon: list
 author:
@@ -102,7 +102,21 @@ form:
             .abbrev:
               type: text
               label: Abbreviation
-            .definition:
+            .definition_en:
               type: editor
               size: small
-              label: Definition
+              label: Definition (EN)
+              validate:
+                required: true
+            .definition_es:
+              type: editor
+              size: small
+              label: Definition (ES)
+            .definition_pt_br:
+              type: editor
+              size: small
+              label: Definition (PT-BR)
+            .definition_ar:
+              type: editor
+              size: small
+              label: Definition (AR)

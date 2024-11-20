@@ -1,11 +1,14 @@
-{% set acronym = item|first %}
-{% set definition = item|last %}
-
+{% set term = term %}
+{% set abbrev = item[0] %}
+{% set definitions = item[1] %}
+{% set currentLang = grav.language.getActive ?: 'en' %}
+{% set definition = definitions|filter(def => def.lang == currentLang)|first.definition ?: definitions|first.definition %}
 
 <dt>
   {{ term }}
-  {% if acronym %}
-    <span class="acronym">({{ acronym }})</span>
+  {% if abbrev %}
+    <span class="acronym">({{ abbrev }})</span>
   {% endif %}
 </dt>
 <dd>{{ definition|markdown }}</dd>
+

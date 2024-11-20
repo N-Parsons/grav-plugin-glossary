@@ -15,8 +15,13 @@
 {% set definitions = {} %}
 {% for term in terms %}
   {# if 'has definition' and 'matches query' #}
-  {% if term.definition and (not query or query in (term.term ~ " " ~ term.abbrev ~ " " ~ term.definition)|lower) %}
-    {% set definitions = definitions|merge({(term.term): [term.abbrev, term.definition]}) %}
+  {% if (term.definition_en or term.definition_es or term.definition_pt_br or term.definition_ar) and (not query or query in (term.term ~ " " ~ term.abbrev ~ " " ~ term.definition_en ~ " " ~ term.definition_es ~ " " ~ term.definition_pt_br ~ " " ~ term.definition_ar)|lower) %}
+    {% set definitions = definitions|merge({(term.term): [term.abbrev, {
+      'en': term.definition_en,
+      'es': term.definition_es,
+      'pt-br': term.definition_pt_br,
+      'ar': term.definition_ar
+}]}) %}
   {% endif %}
 {% endfor %}
 
