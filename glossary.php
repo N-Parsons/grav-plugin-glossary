@@ -82,7 +82,7 @@ class GlossaryPlugin extends Plugin
 
             // Append acronyms to page (if abbrev is defined)
             foreach ($terms as $term) {
-                if (array_key_exists("abbrev", $term)) {
+                if (array_key_exists("abbrev", $term) && $term["abbrev"] !== null) {
                     $raw .= "*[${term['abbrev']}]: ${term['term']}\n";
                 }
             }
